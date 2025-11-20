@@ -27,7 +27,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"strconv"
 	"strings"
@@ -48,7 +47,7 @@ const dataFile = "../../tasks.json"
 
 func loadTasks() Tasks {
 	var tasks Tasks
-	data, err := ioutil.ReadFile(dataFile)
+	data, err := os.ReadFile(dataFile)
 	if err != nil {
 		return tasks // file belum ada → kosong
 	}
@@ -58,7 +57,7 @@ func loadTasks() Tasks {
 
 func saveTasks(tasks Tasks) {
 	data, _ := json.MarshalIndent(tasks, "", "  ")
-	ioutil.WriteFile(dataFile, data, 0644)
+	os.WriteFile(dataFile, data, 0644)
 }
 
 func addTask(title string) {
@@ -191,7 +190,7 @@ go run . list
 Data otomatis tersimpan di file tasks.json (bisa dibuka dengan text editor).
 
 ===============================================================================
-SELESAI! 
+SELESAI!
 Sekarang kamu punya proyek Go pertama yang 100% berfungsi + data permanen.
 Kalau sudah jalan, simpan file TXT ini sebagai referensi seumur hidup.
 
